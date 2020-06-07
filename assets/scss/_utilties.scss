@@ -1,0 +1,159 @@
+@import "./_variable";
+
+%bg-cover-center {
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+%absolute-top-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+%absolute-center {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+%flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+%transition {
+  transition: 0.3s all ease-in-out;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+@mixin xl-width() {
+  $pc-media: 1200px !default;
+  @media (max-width: $pc-media) {
+    @content;
+  }
+}
+
+@mixin lg-width() {
+  $sm-pc-media: 996px !default;
+  @media (max-width: $sm-pc-media) {
+    @content;
+  }
+}
+
+@mixin md-width() {
+  $pad-media: 768px !default;
+  @media (max-width: $pad-media) {
+    @content;
+  }
+}
+
+@mixin sm-width() {
+  $phone-media: 400px !default;
+  @media (max-width: $phone-media) {
+    @content;
+  }
+}
+
+@mixin custom-width($w) {
+  @media screen and (max-width:#{$w}px) {
+    @content;
+  }
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+@mixin setFont($style, $size, $level, $base) {
+  color: getColor($style);
+  font-size: getFontSize($size);
+  font-weight: getFontWeight($level);
+  line-height: getLineHeight($base);
+}
+
+@mixin setBg($url) {
+  background-image: url($url);
+  @extend %bg-cover-center;
+}
+
+@mixin setCircle($w, $h, $style) {
+  width: $w;
+  height: $h;
+  border-radius: 50%;
+  background-color: getColor($style);
+}
+
+@mixin setPersudo($w, $h, $isFloat: true) {
+  content: "";
+  display: inline-block;
+  width: $w;
+  height: $h;
+  @if ($isFloat) {
+    position: absolute;
+    @content;
+  } @else {
+    position: relative;
+    @content;
+  }
+}
+
+@mixin setHover($type: primary, $hover-color: auto) {
+  $c: getColor($type);
+  color: $c;
+  &:hover {
+    @if ($hover-color != auto) {
+      color: getColor($hover-color);
+    } @else {
+      color: adjust-color($c, $lightness: 30%);
+    }
+    transition: 0.3s all ease-in-out;
+  }
+}
+
+@mixin setNavHover($height, $type) {
+  &::after {
+    @include setPersudo(100%, $height);
+    @include setAbsolute($b: 50%, $l: 0);
+    transform: translateY(50%);
+    background-color: getColor($type);
+    opacity: 0;
+    transition: 0.3s all ease-in-out;
+    @content;
+  }
+  &:hover::after {
+    opacity: 1;
+    z-index: -1;
+  }
+}
+
+@mixin setAbsolute($t: auto, $r: auto, $b: auto, $l: auto) {
+  position: absolute;
+  @if $t != auto {
+    top: $t;
+  }
+  @if $r != auto {
+    right: $r;
+  }
+  @if $b != auto {
+    bottom: $b;
+  }
+  @if $l != auto {
+    left: $l;
+  }
+}
+
+@mixin setSkipLine($line: 2) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+  padding-right: getGutter(1);
+  @include sm-width() {
+    display: block;
+  }
+}

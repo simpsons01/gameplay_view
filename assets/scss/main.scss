@@ -1,0 +1,12 @@
+@import "./normalize";
+@import "./reset";
+@import "./variable";
+@import "./utilties";
+
+.container {
+  max-width: $max-width;
+  width: 90%;
+  margin: 0 auto;
+}
+
+
