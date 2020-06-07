@@ -59,7 +59,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['recommendResult', 'searchHistory']),
+    ...mapState(['recommendResult', 'searchHistory', 'searchResult']),
     autoCompleteResult () {
       return this.inputData ? this.recommendResult : this.searchHistory
     }
@@ -72,9 +72,14 @@ export default {
     async getSearchResult (name) {
       this.$nuxt.$loading.start()
       await this.fetchSearchResult({ text: name })
-      this.updateSearchHistory(name)
-      this.$router.push({ path: `/analyse/?game_name=${name}` })
-      this.$nuxt.$loading.finish()
+      if (this.searchResult.length > 0) {
+        this.updateSearchHistory(name)
+        this.$router.push({ path: `/analyse/?game_name=${name}` })
+        this.$nuxt.$loading.finish()
+      } else {
+        this.$nuxt.$loading.finish()
+        this.$router.push({ path: '/error' })
+      }
     },
     onInputTyping: debounce(async function () {
       await this.fetchRecommendResult({ text: this.inputData })
