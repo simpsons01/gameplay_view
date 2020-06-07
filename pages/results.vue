@@ -37,7 +37,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['recommendResult'])
+    ...mapState(['recommendResult', 'searchResult'])
   },
   mounted () {
     this.title = this.$route.query.query
@@ -47,9 +47,14 @@ export default {
     async searchGame (game) {
       this.$nuxt.$loading.start()
       await this.fetchSearchResult({ text: game })
-      this.updateSearchHistory(name)
-      this.$router.push({ path: `/analyse/?game_name=${game}` })
-      this.$nuxt.$loading.finish()
+      if (this.searchResult.length > 0) {
+        this.updateSearchHistory(game)
+        this.$router.push({ path: `/analyse/?game_name=${game}` })
+        this.$nuxt.$loading.finish()
+      } else {
+        this.$nuxt.$loading.finish()
+        this.$router.push({ path: '/error' })
+      }
     }
   }
 }
