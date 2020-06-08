@@ -68,13 +68,6 @@ export default {
   },
   mounted () {
     this.name = this.$route.query.game_name
-  },
-  methods: {
-    backToindex () {
-      this.$router.push({
-        path: '/'
-      })
-    }
   }
 }
 </script>

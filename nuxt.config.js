@@ -84,6 +84,6 @@ module.exports = {
     /*
     ** config about env variable
     */
-    apiUrl: process.env.API_URL || 'http://localhost:8080/api/'
+    apiUrl: process.env.API_URL || 'http://localhost:8181/api/'
   }
 }

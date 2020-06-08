@@ -8,7 +8,6 @@
         ref="type-input"
         v-model.trim="inputData"
         type="text"
-        @compositionstart="isLoading = true"
         @input="onInputTyping"
         @keydown.enter="onInputEnter"
       >
@@ -43,8 +42,9 @@
 
 <script>
 import Spinner from 'components/Spinner'
-import debounce from 'lodash/debounce'
 import { mapActions, mapState } from 'vuex'
+
+let timer
 
 export default {
   name: 'AutoComplete',
@@ -81,10 +81,14 @@ export default {
         this.$router.push({ path: '/error' })
       }
     },
-    onInputTyping: debounce(async function () {
-      await this.fetchRecommendResult({ text: this.inputData })
-      this.isLoading = false
-    }, 600),
+    onInputTyping () {
+      this.isLoading = true
+      clearTimeout(timer)
+      timer = setTimeout(async () => {
+        await this.fetchRecommendResult({ text: this.inputData })
+        this.isLoading = false
+      }, 600)
+    },
     onInputEnter (e) {
       if (e.keyCode === 229 || !this.inputData) return
       if (this.recommendResult.length > 0) {

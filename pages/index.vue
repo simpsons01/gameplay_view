@@ -32,7 +32,7 @@ export default {
   layout: 'default',
   data () {
     return {
-      landingText: 'Search Fun Game',
+      landingText: '',
       textCount: 0,
       typingSpeed: 300,
       isFirstTextFinish: false,
@@ -49,7 +49,8 @@ export default {
       this.setIsFisrtLand(true)
       this.updateSearchHistory()
       this.initTypingAnimate()
-    }
+    } else
+      this.landingText = 'Search Fun Game'
   },
   methods: {
     ...mapActions(['updateSearchHistory']),
