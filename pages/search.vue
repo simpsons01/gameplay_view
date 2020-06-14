@@ -11,11 +11,15 @@
         @input="onInputTyping"
         @keydown.enter="onInputEnter"
       >
-      <span
-        v-show="isLoading"
-        class="auto-complete__type-loading"
-      >
+      <span v-if="inputData" class="auto-complete__type-loading">
+        <button
+          v-if="!isLoading"
+          @click="inputData = ''"
+        >
+          <font-awesome-icon :icon="['fa', 'times']" />
+        </button>
         <spinner
+          v-else
           :size="15"
         />
       </span>
@@ -47,6 +51,10 @@ import { mapActions, mapState } from 'vuex'
 let timer
 
 export default {
+  middleware ({ store, redirect }) {
+    if (!store.state.isFirstLand)
+      return redirect('/')
+  },
   name: 'AutoComplete',
   layout: 'custom',
   components: {
@@ -72,7 +80,7 @@ export default {
     async getSearchResult (name) {
       this.$nuxt.$loading.start()
       await this.fetchSearchResult({ text: name })
-      if (this.searchResult.length > 0) {
+      if (this.searchResult.data.length > 0) {
         this.updateSearchHistory(name)
         this.$router.push({ path: `/analyse/?game_name=${name}` })
         this.$nuxt.$loading.finish()
@@ -122,6 +130,14 @@ export default {
       &-loading {
         width: 15px;
         display: inline-block;
+
+        > button {
+
+          background-color: $primary;
+          color: $white;
+          font-size: $font-md;
+          transform: translateY(1px);
+        }
       }
 
       > span {

@@ -47,7 +47,7 @@ export default {
     async searchGame (game) {
       this.$nuxt.$loading.start()
       await this.fetchSearchResult({ text: game })
-      if (this.searchResult.length > 0) {
+      if (this.searchResult.data.length > 0) {
         this.updateSearchHistory(game)
         this.$router.push({ path: `/analyse/?game_name=${game}` })
         this.$nuxt.$loading.finish()

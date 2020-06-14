@@ -34,10 +34,10 @@ export default {
     return {
       landingText: '',
       textCount: 0,
-      typingSpeed: 300,
+      typingSpeed: 200,
       isFirstTextFinish: false,
       firstText: ['W', 'e', 'l', 'c', 'o', 'm', 'e'],
-      secondText: ['S', 'e', 'a', 'r', 'c', 'h', ' ', 'F', 'u', 'n', ' ', 'G', 'a', 'm', 'e', '!']
+      secondText: ['G', 'S', '版', '搜', '尋', '小', '工', '具']
     }
   },
   computed: {
@@ -50,7 +50,7 @@ export default {
       this.updateSearchHistory()
       this.initTypingAnimate()
     } else
-      this.landingText = 'Search Fun Game'
+      this.landingText = 'GS版搜尋小工具'
   },
   methods: {
     ...mapActions(['updateSearchHistory']),
@@ -78,7 +78,7 @@ export default {
         } else if (this.textCount !== this.secondText.length) {
           clearInterval(timer)
           this.initTypingAnimate()
-          this.typingSpeed = 300
+          this.typingSpeed = 200
           this.landingText += this.secondText[this.textCount]
           this.textCount += 1
         } else
