@@ -36,7 +36,7 @@ export default {
       textCount: 0,
       typingSpeed: 200,
       isFirstTextFinish: false,
-      firstText: ['W', 'e', 'l', 'c', 'o', 'm', 'e'],
+      firstText: ['安', '安', '，', '歡', '迎', '來', '到'],
       secondText: ['G', 'S', '版', '搜', '尋', '小', '工', '具']
     }
   },
