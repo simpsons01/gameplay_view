@@ -26,15 +26,15 @@
         <table>
           <tbody>
             <tr>
-              <td>平均交易價格：</td>
+              <td>平均交易價格</td>
               <td>{{ searchResult.averagePrice }} 元</td>
             </tr>
             <tr>
-              <td>最高交易價格：</td>
+              <td>最高交易價格</td>
               <td>{{ searchResult.maxPrice }} 元</td>
             </tr>
             <tr>
-              <td>最低交易價格：</td>
+              <td>最低交易價格</td>
               <td>{{ searchResult.minPrice }} 元</td>
             </tr>
           </tbody>
@@ -133,10 +133,10 @@ export default {
               padding: $gutter * 4 $gutter * 3;
               color: $white;
               border-right: 1px solid darken($secondary, 10%);
+              text-align: center;
 
               &:nth-child(2) {
                 border: 0;
-                text-align: center;
               }
             }
           }

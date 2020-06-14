@@ -127,9 +127,9 @@ body.backdrop {
 
    &__menu {
      position: absolute;
-     padding: $gutter * 2;
+     padding: $gutter * 4 $gutter * 2;
      background: $white;
-     left: 0;
+     left: -4px;
      top: 10px;
      width: 150px;
      transform: translate(-100%, -100%);
@@ -141,6 +141,20 @@ body.backdrop {
      z-index:  2;
      opacity: 0;
      transition: .3s opacity ease-in-out;
+
+     &::before {
+       content: "";
+       display: block;
+       position: absolute;
+       bottom: -6px;
+       right: -7px;
+       transform: rotate(133deg);
+       width: 0;
+       height: 0;
+       border-style: solid;
+       border-width: 0 7.5px 15px 7.5px;
+       border-color: transparent transparent $white transparent;
+     }
 
      &.open {
        opacity: 1;
