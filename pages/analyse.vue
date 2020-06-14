@@ -105,6 +105,7 @@ export default {
     }
 
     &__text {
+      margin-bottom: 25px;
 
       &-date {
         color: $secondary;
