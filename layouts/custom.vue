@@ -149,7 +149,10 @@ body.backdrop {
      > button {
        font-size: $font-md;
        background: $white;
-       margin-bottom: $gutter * 1.5;
+
+       &:first-child {
+         margin-bottom: $gutter * 1.5;
+       }
      }
    }
  }
